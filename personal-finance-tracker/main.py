@@ -1,8 +1,10 @@
-import pandas as pd 
-import csv 
-from datetime import datetime 
+import pandas as pd
+import csv
+from datetime import datetime
 
-class CSV: 
+# CSV: Manages reading from and writing to the local finance data CSV file.
+# Handles file initialization and appending new transaction entries.
+class CSV:
     # will live in the class itself not on instances 
     CSV_FILE = "finaince_data.csv"
     COLUMNS = ["date", "amount", "category", "description"]
