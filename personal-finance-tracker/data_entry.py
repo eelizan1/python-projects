@@ -1,6 +1,10 @@
 from datetime import datetime
 
-date_format = "$d-%m-%Y"
+date_format = "%d-%m-%Y"
+CATEGORIES = {
+    "I" : "Income", 
+    "E" : "Expense"
+}
 
 # prompt - what we ask the user before they give us the date (could have many prompts)
 # allow_default -  default would be current date
@@ -21,11 +25,25 @@ def get_date(prompt, allow_default=False):
         return get_date(prompt, allow_default) 
 
 def get_amount(): 
-    pass 
+    try: 
+        # try to convert to float 
+        amount = float(input("Enter the amount: "))
+        if amount <= 0: # catch negative amounts 
+            raise ValueError("Amount must be a non-negative non-zero value.")
+
+        return amount
+    except ValueError as e: 
+        print(e)
+        return get_amount()
 
 def get_category(): 
-    pass 
+    category = input("Enter the category ('I' for Income or 'E' for Expense): ").upper()
+    if category in CATEGORIES: 
+        return CATEGORIES[category]
+
+    print("Invalid category. Please enter 'I' for income or 'E' for Expense") 
+    return get_category(); 
 
 
 def get_description(): 
-    pass
+    return input("Enter a description: ")
