@@ -84,17 +84,19 @@ def plot_transaction(df):
     df.set_index("date", inplace=True)
 
     income_df = (
-        df[df["category"] == "Income"]
+        df[df["category"] == "Income"]["amount"]
         .resample("D")
         .sum()
         .reindex(df.index, fill_value=0)
+        .to_frame()
     )
 
     expense_df = (
-        df[df["category"] == "Expense"]
+        df[df["category"] == "Expense"]["amount"]
         .resample("D")
         .sum()
         .reindex(df.index, fill_value=0)
+        .to_frame()
     )
 
     plt.figure(figsize=(10, 5))
